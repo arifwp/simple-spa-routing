@@ -4,8 +4,10 @@ import {
   RouterProvider,
   // Route,
 } from "react-router-dom";
-import HomePage from "./components/Home";
-import ProductsPage from "./components/Product";
+import HomePage from "./pages/Home";
+import ProductsPage from "./pages/Product";
+import RootLayout from "./pages/Root";
+import ErrorPage from "./pages/Error";
 
 // const routeDefinitions = createRoutesFromElements(
 //   <Route>
@@ -15,10 +17,14 @@ import ProductsPage from "./components/Product";
 // );
 
 const router = createBrowserRouter([
-  { path: "/", element: <HomePage /> },
   {
-    path: "/products",
-    element: <ProductsPage />,
+    path: "/",
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/products", element: <ProductsPage /> },
+    ],
   },
 ]);
 
